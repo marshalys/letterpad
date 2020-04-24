@@ -4,14 +4,6 @@
  * This is the initial file which is responsible to bootup the client and the admin-dashboard.
  *
  */
-import express from 'express';
-import { AddressInfo } from 'net';
-
-import adminServer from './admin/server';
-import apiServer from './api/server';
-import clientServerRendering from './client/server/serverRendering';
-import middlewares from './middlewares';
-import staticPaths from './staticPaths';
 
 const env = require("node-env-file");
 try {
@@ -21,6 +13,16 @@ try {
     "The `.env` does not exist. Did you forget to rename `.env.sample` to `.env` ?",
   );
 }
+
+import express from 'express';
+import { AddressInfo } from 'net';
+
+import adminServer from './admin/server';
+import apiServer from './api/server';
+import clientServerRendering from './client/server/serverRendering';
+import middlewares from './middlewares';
+import staticPaths from './staticPaths';
+
 const noop = () => undefined;
 require.extensions[".css"] = noop;
 require.extensions[".svg"] = noop;

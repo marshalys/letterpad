@@ -4,6 +4,15 @@
  * This is the initial file which is responsible to bootup the client and the admin-dashboard.
  *
  */
+import express from 'express';
+import { AddressInfo } from 'net';
+
+import adminServer from './admin/server';
+import apiServer from './api/server';
+import clientServerRendering from './client/server/serverRendering';
+import middlewares from './middlewares';
+import staticPaths from './staticPaths';
+
 const env = require("node-env-file");
 try {
   configureEnvironment();
@@ -16,14 +25,6 @@ const noop = () => undefined;
 require.extensions[".css"] = noop;
 require.extensions[".svg"] = noop;
 
-import { AddressInfo } from "net";
-import adminServer from "./admin/server";
-import apiServer from "./api/server";
-import clientServerRendering from "./client/server/serverRendering";
-import express from "express";
-import middlewares from "./middlewares";
-import staticPaths from "./staticPaths";
-
 const app = express();
 middlewares(app);
 // Take care of static assets.
@@ -35,7 +36,7 @@ if (process.env.NODE_ENV === "production") {
 adminServer(app);
 clientServerRendering(app);
 
-const server = app.listen(process.env.APP_PORT, function() {
+const server = app.listen(parseInt(process.env.APP_PORT || '4040'), process.env.APP_HOST || '127,0,0,1', function() {
   const addressInfo = server.address() as AddressInfo;
   const host = addressInfo.address;
   const port = addressInfo.port;

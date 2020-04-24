@@ -105,6 +105,11 @@ module.exports = (args, name) => {
           },
         },
         {
+          test: /\.(pcss|css)$/,
+          exclude: /src/,
+          use: ["css-loader"],
+        },
+        {
           test: /\.md$/,
           use: [
             {

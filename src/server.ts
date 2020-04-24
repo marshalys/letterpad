@@ -36,7 +36,7 @@ if (process.env.NODE_ENV === "production") {
 adminServer(app);
 clientServerRendering(app);
 
-const server = app.listen(parseInt(process.env.APP_PORT || '4040'), process.env.APP_HOST || '127,0,0,1', function() {
+const server = app.listen(parseInt(process.env.APP_PORT || '4040'), process.env.APP_HOST || '127.0.0.1', function() {
   const addressInfo = server.address() as AddressInfo;
   const host = addressInfo.address;
   const port = addressInfo.port;
